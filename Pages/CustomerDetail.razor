@@ -1,0 +1,58 @@
+﻿@page "/detail"
+@using BlazorDemo.Data
+@using BlazorDemo.Service
+
+@inject ICustomerDetailService detailService
+
+<h3>CustomerDetail</h3>
+<div class="btn btn-outline-info my-5 mx-4" @onclick="onClick">Load Data</div>
+<div class="btn btn-outline-info my-5" @onclick="onClear">Clear Data</div>
+
+
+@if(detailModels == null)
+{
+    <div><em>Loading data....</em></div>
+}
+else
+{
+    <table class="table table-active">
+        <thead>
+            <tr>
+                <th>Customer_Order_ID</th>
+                <th>Item_ID</th>
+                <th>First_Name</th>
+                <th>Last_Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(CustomerDetailModel model in detailModels)
+            {
+                <tr>
+                    <td>@model.CustomerOrderId</td>
+                    <td>@model.ItemId</td>
+                    <td>@model.FirstName</td>
+                    <td>@model.LastName</td>
+                    <td>@model.Description</td>
+                    <td>@model.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private IList<CustomerDetailModel> detailModels = new List<CustomerDetailModel>();
+
+    protected void onClick()
+    {
+        detailModels = detailService.GetList();
+    }
+
+    protected void onClear()
+    {
+        detailModels.Clear();
+    }
+}

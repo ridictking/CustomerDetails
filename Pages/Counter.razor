@@ -1,0 +1,14 @@
+﻿@inherits CounterBase
+@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<div>
+    <input type="checkbox" class="form-check-input" id="useIncrementAmount" @bind="UseIncrementParameter" />
+    <label for="useIncrementAmount">Use increment parameter value of @parameterAmount</label>
+</div>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
